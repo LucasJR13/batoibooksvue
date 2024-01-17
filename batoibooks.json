@@ -1973,24 +1973,6 @@
       "pages": 123,
       "status": "used",
       "comments": "a",
-      "id": 27
-    },
-    {
-      "idModule": "0011",
-      "publisher": "a",
-      "price": 12,
-      "pages": 123,
-      "status": "used",
-      "comments": "a",
-      "id": 28
-    },
-    {
-      "idModule": "0011",
-      "publisher": "a",
-      "price": 12,
-      "pages": 123,
-      "status": "used",
-      "comments": "a",
       "id": 29
     },
     {
@@ -2003,15 +1985,6 @@
       "id": 32
     },
     {
-      "idModule": "0011",
-      "publisher": "a",
-      "price": 12,
-      "pages": 123,
-      "status": "good",
-      "comments": "a",
-      "id": 33
-    },
-    {
       "idModule": "0018",
       "publisher": "lcuas",
       "price": 12,
@@ -2021,13 +1994,40 @@
       "id": 34
     },
     {
-      "idModule": "0031",
-      "publisher": "añlsdhfañl",
+      "idModule": "0011",
+      "publisher": "a",
+      "price": 12,
+      "pages": 123,
+      "status": "used",
+      "comments": "a",
+      "id": 37
+    },
+    {
+      "idModule": "0015",
+      "publisher": "12",
+      "price": 123,
+      "pages": 12,
+      "status": "used",
+      "comments": "a",
+      "id": 39
+    },
+    {
+      "idModule": "0022",
+      "publisher": "a",
       "price": 45,
       "pages": 456,
-      "status": "bad",
+      "status": "used",
       "comments": "a",
-      "id": 35
+      "id": 40
+    },
+    {
+      "idModule": "0015",
+      "publisher": "q",
+      "price": 78,
+      "pages": 789,
+      "status": "digital",
+      "comments": "a",
+      "id": 41
     }
   ]
 }

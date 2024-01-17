@@ -1,7 +1,8 @@
 <script>
 import BooksRepository from '@/repositories/books.repository'
 import BookLi from '../components/BookLi.vue'
-import store from '@/store'
+import { mapActions } from 'pinia'
+import { store } from '../stores'
 
 export default {
   components: {
@@ -14,15 +15,16 @@ export default {
       try {
         await repository.removeBook(id)
         this.delBookFromArray(id)
-        store.addMessage('Libro borrado con éxito')
+        this.addMessage('Libro borrado con éxito')
       } catch {
-        store.addMessage('No se ha podido borrar el libro')
+        this.addMessage('No se ha podido borrar el libro')
       }
     },
     delBookFromArray(id) {
       const index = this.books.findIndex((book) => book.id === id)
       this.books.splice(index, 1)
-    }
+    },
+    ...mapActions(store, ['addMessage'])
   },
 
   data() {
@@ -37,7 +39,7 @@ export default {
       const booksInDB = await repository.getAllBooks()
       this.books = booksInDB
     } catch {
-      store.addMessage('No se han podido cargar los libros de la DB')
+      this.addMessage('No se han podido cargar los libros de la DB')
     }
   },
 

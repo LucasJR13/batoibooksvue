@@ -1,17 +1,16 @@
 <script>
-import store from '../store/'
+import { store } from '../stores/'
+import { mapState, mapActions } from 'pinia';
 
 export default {
   computed: {
-    messages() {
-      return store.state.messages
-    }
+    ...mapState(store, {
+      messages: 'messages'
+    })
   },
 
   methods: {
-    delMessage(message) {
-      store.removeMessage(message.id)
-    }
+    ...mapActions(store, ['delMessage'])
   }
 }
 </script>
@@ -20,7 +19,7 @@ export default {
   <div v-for="message in messages">
     {{ message.text }}
     <button
-      @click="delMessage(message)"
+      @click="delMessage(message.id)"
       type="button"
       class="btn-close"
       data-bs-dismiss="alert"

@@ -1,11 +1,22 @@
 <script>
 import AppMessages from './components/AppMessages.vue'
 import AppMenu from './components/AppMenu.vue'
+import { mapActions } from 'pinia'
+import { store } from './stores'
+
 export default{
   components:{
     AppMenu,
     AppMessages,
-  }
+  },
+  methods:{
+    ...mapActions(store, ['loadModules', 'loadCart']),
+  },
+  mounted(){
+    this.loadModules()
+    this.loadCart()
+  },
+ 
 }
 </script>
 

@@ -1,20 +1,26 @@
 <script>
-import ModulesRepository from '../repositories/modules.repository.js'
 import BooksRepository from '../repositories/books.repository.js'
-import store from '@/store'
+import { mapActions, mapState } from 'pinia'
+import { store } from '../stores'
 
 export default {
   data() {
     return {
       book: {},
-      modules: [],
       titulo: "Añadir Libro",
       boton: "Añadir"
     }
   },
 
+  computed: {
+    ...mapState(store, {
+      modules: 'modules',
+    })
+  },
+
+  props: ['id'],
+
   async mounted() {
-    const modulesRepository = new ModulesRepository()
     const booksRepository = new BooksRepository()
     try {
       if(this.$route.params.id){
@@ -22,10 +28,25 @@ export default {
         this.titulo = "Editar Libro"
         this.boton = "Editar"
       }
-      const modulesInDB = await modulesRepository.getAllModules()
-      this.modules = modulesInDB
     } catch {
-      store.addMessage('Error al cargar los módulos desde la BD')
+      this.addMessage('Error al cargar los módulos desde la BD')
+    }
+  },
+
+  watch: {
+    async id(newValue){
+      const booksRepository = new BooksRepository()
+
+      if (newValue) {
+        this.titulo = "Editar Libro"
+        this.boton = "Editar"
+        this.book = await booksRepository.getBookById(newValue)
+      } else {
+        this.titulo = "Añadir Libro"
+        this.boton = "Añadir"
+        this.book = {}
+      }
+      
     }
   },
 
@@ -35,14 +56,14 @@ export default {
       try {
         if (this.book.id){
           await repository.changeBook(this.book)
-          store.addMessage('Libro editado correctamente')
+          this.addMessage('Libro editado correctamente')
         } else {
           await repository.addBook(this.book)
-          store.addMessage('Libro añadido correctamente')
+          this.addMessage('Libro añadido correctamente')
         }
         this.$router.push("/list")
       } catch {
-        store.addMessage('Error en el libro')
+        this.addMessage('Error en el libro')
       }
     },
     async reset(){
@@ -52,7 +73,8 @@ export default {
       } else {
         this.book = {}
       }
-    }
+    },
+    ...mapActions(store, ['addMessage']),
   }
 }
 </script>
