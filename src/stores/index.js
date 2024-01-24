@@ -60,8 +60,7 @@ export const store = defineStore('store', {
     },
     getters:{
         getModuleById: (state) => (id) => {
-            const module = state.modules.find((module) => module.code === id)
-            return module || {}
+            return state.modules.find((module) => module.code === id) || {}
           },
     }
 })
